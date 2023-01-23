@@ -1,0 +1,3 @@
+mamad, 3422, student
+ali, 2233, instructor
+zahed, rahi, instructor
