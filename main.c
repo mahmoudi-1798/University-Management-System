@@ -16,9 +16,7 @@ void back();
 void exitp();
 void DeleteStudent(int ID);
 int Login(FILE *fpa);
-
 int numPlaces (int n);
-
 
 // Variables
 int count = 1;
@@ -27,6 +25,7 @@ int AllStudents = 0;
 int AllCourses = 0;
 int AllInstructor = 0;
 
+// Files
 FILE *AllStu;
 FILE *AllCou;
 FILE *AllInst;
@@ -34,7 +33,7 @@ FILE *AllAuthentic;
 FILE *temp;
 FILE *fpn;
 
-// Struct
+// Structs
 struct Student {
     char StuFname[30];
     char StuLname[30];
@@ -61,6 +60,7 @@ struct Authentic {
     char Role[20];
 };
 
+// List of Structs
 struct Student ListStudents[100];
 struct Course ListCourses[100];
 struct Instructor ListInstructor[100];
@@ -69,9 +69,8 @@ struct Authentic ListAuthentic[100];
 
 // Main Function
 int main(){
-
-    int mn = 1;
-    char name[50];
+    char name[50]; // for creating a file for each student
+    int flag = 1;
 
     //temp = fopen("delete.tmp", "w+");
     AllStu = fopen("list.txt", "r+");
@@ -79,7 +78,6 @@ int main(){
         printf("File can't be opened !");
         exit(1);
     }
-    int flag = 1;
 
     system("cls");
     while(running){
@@ -89,33 +87,40 @@ int main(){
         int d_line;
 
         switch (input) {
-            // Exit
+
+            // Exit ////////////////////////////////////////////////////////////////////////////////////////////////////////
             case 0:
                 running = false;
                 exitp();
                 break;
 
-            // Add new student
+            // Add New Student //////////////////////////////////////////////////////////////////////////////////////////////
             case 1:
+                {
                 AllStu = fopen("list.txt", "a");
                 system("cls");
                
-                printf("***********************************   Add New Student   **************************************\n\n");
-
-                printf("\tenter First Name : ");
+                printf("\n\n");
+                printf("\t\t ---------------------------------------------------------------------------------------------------------------\n");
+                printf("\t\t|                                                                                                               |\n");
+                printf("\t\t|                                               Add New Student                                                 |\n");
+                printf("\t\t|                                                                                                               |\n");
+                printf("\t\t ---------------------------------------------------------------------------------------------------------------\n\n");
+                printf("\t\t\tEnter First Name : ");
                 scanf("%s", &ListStudents[AllStudents].StuFname);
-                printf("\tenter Last Name : ");
+                printf("\t\t\tEnter Last Name : ");
                 scanf("%s", &ListStudents[AllStudents].StuLname);
-                printf("\tenter ID : ");
+                printf("\t\t\tEnter ID : ");
                 scanf("%i", &ListStudents[AllStudents].StuNum);
-                printf("\tenter Major : ");
+                printf("\t\t\tEnter Major : ");
                 scanf("%s", &ListStudents[AllStudents].StuMajor);
 
                 fprintf(AllStu, "%s, %s, %i, %s\n", ListStudents[AllStudents].StuFname, 
                                                 ListStudents[AllStudents].StuLname, 
                                                 ListStudents[AllStudents].StuNum, 
                                                 ListStudents[AllStudents].StuMajor);
-
+                
+                // creating a file for each student
                 sprintf(name, "%i.txt",ListStudents[AllStudents].StuNum);
 
                 fpn = fopen(name, "w+");
@@ -123,8 +128,8 @@ int main(){
                 AllStudents += 1;
                 back();
                 break;
-
-            // Delete Studetn
+                }
+            // Delete Student ///////////////////////////////////////////////////////////////////////////////////////////// 
             case 2:
             /*
                 system("cls");
@@ -147,30 +152,35 @@ int main(){
                 break;
             */
 
-            // Show all student
+            // Show All Student /////////////////////////////////////////////////////////////////////////////////////////////
             case 3:
                 system("cls");
-                sleep(SLEEP_TIME);
-                printf("***********************************   Show All Students   ************************************\n\n");
-
+                sleep(SLEEP_TIME);              
                 StudentReader();
                 back();
                 break;
 
-            // Add new course
+            // Add New Course ////////////////////////////////////////////////////////////////////////////////////////////////
             case 4:
+                {
                 system("cls");
                 sleep(SLEEP_TIME);
-                printf("************************************    Add New Course    ************************************\n\n");
+
+                printf("\n\n");
+                printf("\t\t ---------------------------------------------------------------------------------------------------------------\n");
+                printf("\t\t|                                                                                                               |\n");
+                printf("\t\t|                                              Add New Course                                                   |\n");
+                printf("\t\t|                                                                                                               |\n");
+                printf("\t\t ---------------------------------------------------------------------------------------------------------------\n\n");                
 
                 AllCou = fopen("course.txt", "a");      
 
-                printf("\tenter Code : ");
+                printf("\t\t\tEnter Code : ");
                 scanf("%s", &ListCourses[AllCourses].CourseCode);
                 fflush(stdin);
-                printf("\tenter Name : ");
+                printf("\t\t\tEnter Name : ");
                 gets(ListCourses[AllCourses].CourseName);
-                printf("\tenter Weight: ");
+                printf("\t\t\tEnter Weight: ");
                 scanf("%i", &ListCourses[AllCourses].Weight);
 
                 fprintf(AllCou, "%s, %s, %i\n", ListCourses[AllCourses].CourseCode, 
@@ -179,25 +189,24 @@ int main(){
                 AllCourses += 1;
                 back();
                 break;
+                }
 
-            // Show All Courses
+            // Show All Courses ///////////////////////////////////////////////////////////////////////////////////////////////
             case 5:
                 system("cls");
                 sleep(SLEEP_TIME);
-                printf("**********************************   Show All Courses   **************************************\n\n");
-
                 CourseReader();
                 back();
                 break;
 
-            //Delete Course
+            // Delete Course ///////////////////////////////////////////////////////////////////////////////////////////////////
             case 6:
                 /*
 
                 break;
                 */
             
-            // Add Instructor
+            // Add Instructor /////////////////////////////////////////////////////////////////////////////////////////////////
             case 7: 
                 system("cls");
                 sleep(SLEEP_TIME);
@@ -223,7 +232,7 @@ int main(){
                 back();
                 break;
 
-            //Show All Instructor
+            // Show All Instructor ////////////////////////////////////////////////////////////////////////////////////////////////
             case 8:
                 system("cls");
                 sleep(SLEEP_TIME);
@@ -232,12 +241,21 @@ int main(){
                 InstructorReader();
                 back();
                 break;
-            // Authentication 
-            case 9:
+
+            // Authentication /////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*case 9:
                 while(flag){
                     system("cls");
                     flag = Login(AllAuthentic);
                 }
+                back();
+                break;
+            */
+
+           // About ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            case 9:
+                system("cls");
+                AboutMe();
                 back();
                 break;
 
@@ -304,56 +322,66 @@ int Login(FILE *fpa){
     }
 
 void menu(){
-    printf("\n\n\t===================================================================\n");
-    printf("\t||                                                               ||\n");
-    printf("\t||              Amirkabir University of Technology               ||\n");
-    printf("\t||                                                               ||\n");
-    printf("\t||---------------------------------------------------------------||\n");
-    printf("\t||                            MENU                               ||\n");
-    printf("\t||---------------------------------------------------------------||\n");
-    printf("\t||                                                               ||\n");
-    printf("\t||\t\t[ 1 ] Add New Student                            ||\n");
-    printf("\t||\t\t[ 2 ] Delete Student                             ||\n"); 
-    printf("\t||\t\t[ 3 ] Show All Students                          ||\n");
-    printf("\t||\t\t[ 4 ] Add New Course                             ||\n");
-    printf("\t||\t\t[ 5 ] Show All Courses                           ||\n");
-    printf("\t||\t\t[ 6 ] Delete Course                              ||\n");
-    printf("\t||\t\t[ 7 ] Add New Instructor                         ||\n");
-    printf("\t||\t\t[ 8 ] Show All Instructors                       ||\n");
-    printf("\t||\t\t[ 0 ] Exit                                       ||\n");
-    printf("\t||                                                               ||\n");
-    printf("\t||---------------------------------------------------------------||\n\n");
-    printf("\t\t\tenter : ");
+    printf("\n\n");
+    printf("\t\t=================================================================================================================\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||                                    Amirkabir University of Technology                                       ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||-------------------------------------------------------------------------------------------------------------||\n");
+    printf("\t\t||                                             Educational Potal                                               ||\n");
+    printf("\t\t||-------------------------------------------------------------------------------------------------------------||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||\t\t[ 1 ] Add New Student                                                                          ||\n");
+    printf("\t\t||\t\t[ 2 ] Delete Student                                                                           ||\n"); 
+    printf("\t\t||\t\t[ 3 ] Show All Students                                                                        ||\n");
+    printf("\t\t||\t\t[ 4 ] Add New Course                                                                           ||\n");
+    printf("\t\t||\t\t[ 5 ] Show All Courses                                                                         ||\n");
+    printf("\t\t||\t\t[ 6 ] Delete Course                                                                            ||\n");
+    printf("\t\t||\t\t[ 7 ] Add New Instructor                                                                       ||\n");
+    printf("\t\t||\t\t[ 8 ] Show All Instructors                                                                     ||\n");
+    printf("\t\t||\t\t[ 9 ] About                                                                                    ||\n");
+    printf("\t\t||\t\t[ 0 ] Exit                                                                                     ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||-------------------------------------------------------------------------------------------------------------||\n\n");
+    printf("\t\t\t\tEnter : ");
 
 }
 
 void StudentReader(){
     AllStu = fopen("list.txt", "r");
 
-    printf("\t|=====================|=====================|===================|================|\n");
-    printf("\t|      First Name     |      Last Name      |     Student ID    |      Major     |\n");
-    printf("\t|=====================|=====================|===================|================|\n");
+    printf("\n\n");
+    printf("\t\t ---------------------------------------------------------------------------------------------------------------\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t|                                              Show All Students                                                |\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t ---------------------------------------------------------------------------------------------------------------\n\n");
+    printf("\t\t|===============================|===============================|===========================|===================|\n");
+    printf("\t\t|           First Name          |           Last Name           |         Student ID        |        Major      |\n");
+    printf("\t\t|===============================|===============================|===========================|===================|\n");
     
     for(int i = 0; i < AllStudents; i++){
-        printf("\t| %s", ListStudents[i].StuFname);
-        for (int j = 0; j < 20-strlen(ListStudents[i].StuFname); j++){
+        printf("\t\t| %s", ListStudents[i].StuFname);
+        for (int j = 0; j < 30-strlen(ListStudents[i].StuFname); j++){
             printf(" ");
         }
         
         printf("| %s", ListStudents[i].StuLname);
-        for (int j = 0; j < 20-strlen(ListStudents[i].StuLname); j++){
+        for (int j = 0; j < 30-strlen(ListStudents[i].StuLname); j++){
             printf(" ");
         }
         printf("| %i", ListStudents[i].StuNum);
-        for (int j = 0; j < 10; j++){
+        for (int j = 0; j < 18; j++){
             printf(" ");
         }
         printf("| %s", ListStudents[i].StuMajor);
-        for (int j = 0; j < 15-strlen(ListStudents[i].StuMajor); j++){
+        for (int j = 0; j < 18-strlen(ListStudents[i].StuMajor); j++){
             printf(" ");
         }
         printf("|\n");
-        printf("\t|---------------------|---------------------|-------------------|----------------|\n");
+        printf("\t\t|-------------------------------|-------------------------------|---------------------------|-------------------|\n");
 
     }
 }
@@ -361,26 +389,34 @@ void StudentReader(){
 void CourseReader(){
     AllCou = fopen("course.txt", "r");
 
-    printf("\t|=====================|===============================|============|\n");
-    printf("\t|         Code        |             Name              |   Weight   |\n");
-    printf("\t|=====================|===============================|============|\n");
+    printf("\n\n");
+    printf("\t\t ---------------------------------------------------------------------------------------------------------------\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t|                                             Show All Courses                                                  |\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t ---------------------------------------------------------------------------------------------------------------\n\n");                
+
+    printf("\t\t|======================================|===============================================|========================|\n");
+    printf("\t\t|                  Code                |                      Name                     |         Weight         |\n");
+    printf("\t\t|======================================|===============================================|========================|\n");
+
 
     for(int i = 0; i < AllCourses; i++){
-        printf("\t| %s", ListCourses[i].CourseCode);
-        for (int j = 0; j < 20-strlen(ListCourses[i].CourseCode); j++){
+        printf("\t\t| %s", ListCourses[i].CourseCode);
+        for (int j = 0; j < 37 - strlen(ListCourses[i].CourseCode); j++){
             printf(" ");
         }
         
         printf("| %s", ListCourses[i].CourseName);
-        for (int j = 0; j < 30 - strlen(ListCourses[i].CourseName); j++){
+        for (int j = 0; j < 46 - strlen(ListCourses[i].CourseName); j++){
             printf(" ");
         }
         printf("| %i", ListCourses[i].Weight);
-        for (int j = 0; j < 10; j++){
+        for (int j = 0; j < 22; j++){
             printf(" ");
         }
         printf("|\n");
-        printf("\t|---------------------|-------------------------------|------------|\n");
+        printf("\t\t|--------------------------------------|-----------------------------------------------|------------------------|\n");
 
     }
 }
@@ -446,8 +482,8 @@ void Delete(FILE *src, FILE *temp, const int count){
 void back(){
     getchar();
     char io;
-    printf("\n        - Enter any key to go back.\n");
-    printf("        - Enter 0 to exit.\n");
+    printf("\n\n\t        - Press Enter to go back.\n");
+    printf("\t        - Enter 0 to exit.\n");
     scanf("%c", &io);
 
     if (io == '0'){
@@ -473,7 +509,40 @@ void exitp(){
     exit(0);
 }
 
+void AboutMe(){
+    printf("\n\n");
+    printf("\t\t=================================================================================================================\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||                                  Amirkabir University of Technology                                         ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t=================================================================================================================\n\n");
+    printf("\t\t-----------------------------------------------------------------------------------------------------------------\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||         About :                                                                                             ||\n");
+    printf("\t\t||_____________________________________________________________________________________________________________||\n");
+    printf("\t\t||                                                                                                             ||\n");    
+    printf("\t\t||                 Full Name  :  Mohammad Hassan   Mahmoudi                                                   ||\n");
+    printf("\t\t||                 ID         :  40112049                                                                     ||\n");
+    printf("\t\t||                 Major      :  Applied Mathematics                                                          ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||                                                                                                             ||\n");    
+    printf("\t\t||                 Linkedin   : https://www.linkedin.com/in/mohammad-hassan-mahmoudi-94297320b/                ||\n");
+    printf("\t\t||                 GitHub     : https://github.com/mahmoudi-1798                                               ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t||                                                                                                             ||\n");
+    printf("\t\t-----------------------------------------------------------------------------------------------------------------\n");
+    printf("\n\n\n");
+}
+
 int numPlaces (int n) {
     if (n < 10) return 1;
     return 1 + numPlaces (n / 10);
 }
+
+
+/*
+    css of (add instructor), (Show instructor)
+    enabling getiing name input with space
+    exit page 
+*/
