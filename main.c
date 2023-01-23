@@ -35,10 +35,10 @@ FILE *fpn;
 
 // Structs
 struct Student {
-    char StuFname[30];
-    char StuLname[30];
+    char StuFname[40];
+    char StuLname[40];
     int StuNum;
-    char StuMajor[20];
+    char StuMajor[40];
 };
 
 struct Course {
@@ -48,8 +48,8 @@ struct Course {
 };
 
 struct Instructor {
-    char InstFname[30];
-    char InstLname[30];
+    char InstFname[40];
+    char InstLname[40];
     char InstPos[30];
     char InstMajor[30];
 };
@@ -106,8 +106,10 @@ int main(){
                 printf("\t\t|                                               Add New Student                                                 |\n");
                 printf("\t\t|                                                                                                               |\n");
                 printf("\t\t ---------------------------------------------------------------------------------------------------------------\n\n");
+                
+                fflush(stdin);
                 printf("\t\t\tEnter First Name : ");
-                scanf("%s", &ListStudents[AllStudents].StuFname);
+                gets(ListStudents[AllStudents].StuFname);
                 printf("\t\t\tEnter Last Name : ");
                 scanf("%s", &ListStudents[AllStudents].StuLname);
                 printf("\t\t\tEnter ID : ");
@@ -210,24 +212,31 @@ int main(){
             case 7: 
                 system("cls");
                 sleep(SLEEP_TIME);
-                printf("************************************    Add New Instructor    ************************************\n\n");
+
+                printf("\n\n");
+                printf("\t\t ---------------------------------------------------------------------------------------------------------------\n");
+                printf("\t\t|                                                                                                               |\n");
+                printf("\t\t|                                            Add New Instructor                                                 |\n");
+                printf("\t\t|                                                                                                               |\n");
+                printf("\t\t ---------------------------------------------------------------------------------------------------------------\n\n");                
 
                 AllInst = fopen("instructor.txt", "a");      
 
-                printf("\tenter First Name : ");
-                scanf("%s", &ListInstructor[AllInstructor].InstFname);
-                printf("\tenter Last Name : ");
+                fflush(stdin);
+                printf("\t\t\tEnter First Name : ");
+                gets(ListInstructor[AllInstructor].InstFname);
+                printf("\t\t\tEnter Last Name : ");
                 scanf("%s", &ListInstructor[AllInstructor].InstLname);
                 fflush(stdin);
-                printf("\tenter Position : ");
+                printf("\t\t\tEnter Position : ");
                 gets(ListInstructor[AllInstructor].InstPos);
-                printf("\tenter Major: ");
+                printf("\t\t\tEnter Major: ");
                 scanf("%s", &ListInstructor[AllInstructor].InstMajor);
 
                 fprintf(AllCou, "%s, %s, %s, %s\n", ListInstructor[AllInstructor].InstFname, 
-                                                ListInstructor[AllInstructor].InstLname, 
-                                                ListInstructor[AllInstructor].InstPos,
-                                                ListInstructor[AllInstructor].InstMajor);                            
+                                                    ListInstructor[AllInstructor].InstLname, 
+                                                    ListInstructor[AllInstructor].InstPos,
+                                                    ListInstructor[AllInstructor].InstMajor);                            
                 AllInstructor += 1;
                 back();
                 break;
@@ -236,8 +245,6 @@ int main(){
             case 8:
                 system("cls");
                 sleep(SLEEP_TIME);
-                printf("***********************************   Show All Instructors   ****************************************\n\n");
-
                 InstructorReader();
                 back();
                 break;
@@ -333,11 +340,11 @@ void menu(){
     printf("\t\t||                                                                                                             ||\n");
     printf("\t\t||                                                                                                             ||\n");
     printf("\t\t||\t\t[ 1 ] Add New Student                                                                          ||\n");
-    printf("\t\t||\t\t[ 2 ] Delete Student                                                                           ||\n"); 
+    printf("\t\t||\t\t[ 2 ] Delete Student      < Soon >                                                             ||\n"); 
     printf("\t\t||\t\t[ 3 ] Show All Students                                                                        ||\n");
     printf("\t\t||\t\t[ 4 ] Add New Course                                                                           ||\n");
     printf("\t\t||\t\t[ 5 ] Show All Courses                                                                         ||\n");
-    printf("\t\t||\t\t[ 6 ] Delete Course                                                                            ||\n");
+    printf("\t\t||\t\t[ 6 ] Delete Course       < Soon >                                                             ||\n");
     printf("\t\t||\t\t[ 7 ] Add New Instructor                                                                       ||\n");
     printf("\t\t||\t\t[ 8 ] Show All Instructors                                                                     ||\n");
     printf("\t\t||\t\t[ 9 ] About                                                                                    ||\n");
@@ -424,17 +431,23 @@ void CourseReader(){
 void InstructorReader(){
     AllInst = fopen("instructor.txt", "r");
 
-    printf("\t|=====================|=====================|===============================|================|\n");
-    printf("\t|      First Name     |      Last Name      |            Position           |      Major     |\n");
-    printf("\t|=====================|=====================|===============================|================|\n");
+    printf("\n\n");
+    printf("\t\t ---------------------------------------------------------------------------------------------------------------\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t|                                              Show All Students                                                |\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t ---------------------------------------------------------------------------------------------------------------\n\n");
+    printf("\t\t|==============================|==============================|===============================|=================|\n");
+    printf("\t\t|           First Name         |           Last Name          |            Position           |       Major     |\n");
+    printf("\t\t|==============================|==============================|===============================|=================|\n");
 
     for(int i = 0; i < AllInstructor; i++){
-        printf("\t| %s", ListInstructor[i].InstFname);
-        for (int j = 0; j < 20-strlen(ListInstructor[i].InstFname); j++){
+        printf("\t\t| %s", ListInstructor[i].InstFname);
+        for (int j = 0; j < 29 - strlen(ListInstructor[i].InstFname); j++){
             printf(" ");
         }
         printf("| %s", ListInstructor[i].InstLname);
-        for (int j = 0; j < 20-strlen(ListInstructor[i].InstLname); j++){
+        for (int j = 0; j < 29 - strlen(ListInstructor[i].InstLname); j++){
             printf(" ");
         }
         
@@ -443,12 +456,12 @@ void InstructorReader(){
             printf(" ");
         }
         printf("| %s", ListInstructor[i].InstMajor);
-        for (int j = 0; j < 15 - strlen(ListInstructor[i].InstMajor); j++){
+        for (int j = 0; j < 16 - strlen(ListInstructor[i].InstMajor); j++){
             printf(" ");
         }
 
         printf("|\n");
-        printf("\t|---------------------|---------------------|-------------------------------|----------------|\n");
+        printf("\t\t|------------------------------|------------------------------|-------------------------------|-----------------|\n");
 
     }
 }
@@ -496,13 +509,36 @@ void back(){
 
 void exitp(){
     system("cls");
-    printf("\n\n\n");
+    /*printf("\n\n\n");
     printf("*****************************************************************************************\n");
     printf("***************************     Thanks for your time.     *******************************\n");
     printf("***************************                               *******************************\n");
     printf("***************************                               *******************************\n");
     printf("*****************************************************************************************\n");
-    printf("\n\n\n");
+    printf("\n\n\n");*/
+
+    printf("\n\n\n\n\n");
+    printf("\n\n\n\n\n");
+    printf("\t\t _______________________________________________________________________________________________________________\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t|                                          Thank You for your time                                              |\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t|                                                                                                               |\n");
+    printf("\t\t ____________     ______________________________________________________________________________________________\n");
+    printf("\t\t             \\  /\n");    
+    printf("\t\t  |\\/\\/\\/|   \\ /\n");    
+    printf("\t\t  |      |   \\/\n");    
+    printf(  "\t\t  | (o)(o)\n"  );
+    printf( "\t\t  C      _)\n") ;
+    printf(  "\t\t  |  ___|\n"  );
+    printf(  "\t\t  |   / \n"   );
+    printf( "\t\t /____\\\n"    );
+    printf( "\t\t/      \\\n");
+    printf("\n\n\n\n\n");
+    printf("\n\n\n\n\n");
+ 
+    
 
     fclose(AllStu);
     fclose(temp);
@@ -521,9 +557,9 @@ void AboutMe(){
     printf("\t\t||         About :                                                                                             ||\n");
     printf("\t\t||_____________________________________________________________________________________________________________||\n");
     printf("\t\t||                                                                                                             ||\n");    
-    printf("\t\t||                 Full Name  :  Mohammad Hassan   Mahmoudi                                                   ||\n");
-    printf("\t\t||                 ID         :  40112049                                                                     ||\n");
-    printf("\t\t||                 Major      :  Applied Mathematics                                                          ||\n");
+    printf("\t\t||                 Full Name  :  Mohammad Hassan   Mahmoudi                                                    ||\n");
+    printf("\t\t||                 ID         :  40112049                                                                      ||\n");
+    printf("\t\t||                 Major      :  Applied Mathematics                                                           ||\n");
     printf("\t\t||                                                                                                             ||\n");
     printf("\t\t||                                                                                                             ||\n");    
     printf("\t\t||                 Linkedin   : https://www.linkedin.com/in/mohammad-hassan-mahmoudi-94297320b/                ||\n");
@@ -539,10 +575,3 @@ int numPlaces (int n) {
     if (n < 10) return 1;
     return 1 + numPlaces (n / 10);
 }
-
-
-/*
-    css of (add instructor), (Show instructor)
-    enabling getiing name input with space
-    exit page 
-*/
