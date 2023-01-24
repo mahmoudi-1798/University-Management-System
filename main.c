@@ -10,16 +10,17 @@
 
 // Functions
 void menu();
-void reder();
+void StudentReader();
+void CourseReader();
+void InstructorReader();
+void DeleteStudent(int ID);
 void Delete(FILE *src, FILE *temp, const int count);
 void back();
+void AboutMe();
 void exitp();
-void DeleteStudent(int ID);
 int Login(FILE *fpa);
-int numPlaces (int n);
 
-// Variables
-int count = 1;
+// Global Variables
 bool running = true;
 int AllStudents = 0;
 int AllCourses = 0;
@@ -509,13 +510,6 @@ void back(){
 
 void exitp(){
     system("cls");
-    /*printf("\n\n\n");
-    printf("*****************************************************************************************\n");
-    printf("***************************     Thanks for your time.     *******************************\n");
-    printf("***************************                               *******************************\n");
-    printf("***************************                               *******************************\n");
-    printf("*****************************************************************************************\n");
-    printf("\n\n\n");*/
 
     printf("\n\n\n\n\n");
     printf("\n\n\n\n\n");
@@ -571,7 +565,4 @@ void AboutMe(){
     printf("\n\n\n");
 }
 
-int numPlaces (int n) {
-    if (n < 10) return 1;
-    return 1 + numPlaces (n / 10);
-}
+
