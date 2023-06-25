@@ -2,7 +2,7 @@
 
 ![alt text](https://github.com/mahmoudi-1798/University-Management-System/blob/master/menu-pic.png?raw=true)
 
-## Final Project Of ( Introduction of Programming ) in the fall semester of 2023.
+## Final Project Of ( Introduction of Programming ) in the fall semester of 2022.
 
 I was so Reluctant to get the University project done, but I thought i can expand and update it to a big project :)
 <br><br>
